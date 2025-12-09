@@ -1,5 +1,4 @@
-import pandas as pd
-import methods
+from vdmc_salesforce_migration import methods
 import datetime
 import copy
 

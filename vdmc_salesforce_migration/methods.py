@@ -13,39 +13,6 @@ from concurrent.futures import ThreadPoolExecutor
 SQL_FOLDER = 'SQL'
 MAP_FOLDER = 'Mappings'
 
-def load_credentials(env):
-    with open('credentials.json', 'r', encoding='utf-8') as f:
-        credentials = json.load(f)
-    return credentials[env]
-    
-def connect_to_sf(sf_credentials):
-    # Build the API connection to SF
-    if sf_credentials["isSandbox"] == True:
-        client = Salesforce(
-            username=sf_credentials["user"],
-            password=sf_credentials["password"],
-            security_token=sf_credentials["token"],
-            instance_url=sf_credentials["domain"],
-            domain='test',
-            version='63.0'
-        )
-    else:
-        client = Salesforce(
-            username=sf_credentials["user"],
-            password=sf_credentials["password"],
-            security_token=sf_credentials["token"],
-            instance_url=sf_credentials["domain"],
-            version='63.0'
-        )
-
-    # Check if connection work
-    response = client.query_all("SELECT Id FROM User LIMIT 1")
-    if response != None:
-        print('Connection to SF established')
-    else:
-        print('Could not fetch metadata')
-
-    return client
 
 def load_mapping(name):
     with open(MAP_FOLDER + '/' + name, 'r', encoding='utf-8') as f:

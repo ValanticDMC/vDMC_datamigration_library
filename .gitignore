@@ -1,0 +1,6 @@
+# Environment files
+.env*
+!.env.example     # allow an example template
+
+#IDE
+.idea*
