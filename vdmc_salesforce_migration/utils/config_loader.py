@@ -8,7 +8,7 @@ def load_config():
     """
     Loads config.yaml from the package root directory and caches it.
     """
-    root_dir = Path(__file__).resolve().parent.parent
+    root_dir = Path(__file__).resolve().parent.parent.parent
     config_path = root_dir / "config.yaml"
 
     if not config_path.exists():

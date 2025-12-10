@@ -7,7 +7,10 @@ from vdmc_salesforce_migration.utils.logging import (
     append_csv_row
 )
 from vdmc_salesforce_migration.utils.config_loader import get_log_dir, get_default_env, get_default_batch_size
+from vdmc_salesforce_migration.api.auth import get_salesforce_client
 import requests
+import math
+from concurrent.futures import ThreadPoolExecutor
 
 log_dir = get_log_dir()
 env = get_default_env()
@@ -199,3 +202,68 @@ def activate_assets_via_api(
             append_csv_row(log_file, [order_id, response.text])
 
     print(f"[Asset Activation] Complete. Errors logged to {log_file}")
+
+
+def chunk_data(data, num_chunks):
+    """
+    Split data evenly into <num_chunks> chunks.
+    """
+    size = math.ceil(len(data) / num_chunks)
+    return [data[i:i+size] for i in range(0, len(data), size)]
+
+def upload_rest_chunk(env, chunk, object_name, external_id, id_field):
+    """
+    Worker function run in a thread.
+    Creates its own Salesforce client and uploads a chunk.
+    """
+    client = get_salesforce_client(env)
+    upload_to_sf_rest(
+        client=client,
+        object_name=object_name,
+        data=chunk,
+        external_identifier=external_id,
+        id_field=id_field,
+        env=env
+    )
+
+
+def upload_rest_parallel(
+    object_name: str,
+    data: list,
+    external_identifier: str = None,
+    id_field: str = None,
+    num_threads: int = 4,
+    env: str = None
+):
+    """
+    Parallel REST upload using multiple threads.
+    """
+    if env is None:
+        env = get_default_env()
+
+    chunks = chunk_data(data, num_threads)
+
+    print(f"▶ Starting parallel REST upload with {num_threads} threads…")
+    print(f"▶ Total records: {len(data)} | Chunks: {len(chunks)}")
+
+    with ThreadPoolExecutor(max_workers=num_threads) as executor:
+        futures = [
+            executor.submit(
+                upload_rest_chunk,
+                env,
+                chunk,
+                object_name,
+                external_identifier,
+                id_field
+            )
+            for chunk in chunks
+        ]
+
+        for i, future in enumerate(futures, start=1):
+            try:
+                future.result()
+                print(f"✔ Chunk {i}/{num_threads} done")
+            except Exception as e:
+                print(f"❌ Error in chunk {i}: {e}")
+
+    print("✔ Parallel REST upload complete.")

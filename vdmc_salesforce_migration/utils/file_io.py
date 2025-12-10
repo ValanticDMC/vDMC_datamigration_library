@@ -73,7 +73,7 @@ def load_file_with_mapping(pattern: str, mapping_file: str, table_name: str) -> 
     mapping = load_table_mapping(mapping_file, table_name)
 
     # Restrict to the keys that exist in the mapping
-    source_fields = list(mapping[table_name].keys())
+    source_fields = list(mapping.keys())
 
     missing_fields = [f for f in source_fields if f not in df.columns]
     if missing_fields:
@@ -82,6 +82,6 @@ def load_file_with_mapping(pattern: str, mapping_file: str, table_name: str) -> 
     df = df[source_fields]
 
     # Apply Salesforce renaming
-    df = df.rename(columns=mapping[table_name])
+    df = df.rename(columns=mapping)
 
     return df

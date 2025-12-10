@@ -2,26 +2,35 @@
 name = "vdmc-salesforce-migration"
 version = "0.1.0"
 description = "Internal library for Salesforce data migration"
-authors = [
-    { name="Pascal Klos", email="pascal.klos@dmc.valantic.com" }
-]
 readme = "README.md"
 requires-python = ">=3.10"
 
+authors = [
+    { name = "Pascal Klos", email = "pascal.klos@dmc.valantic.com" }
+]
+
 dependencies = [
     "simple-salesforce>=1.12.5",
-    "pandas>=1.5",
+    "pandas>=1.5.0",
     "requests>=2.28",
     "python-dotenv>=1.0",
+    "PyYAML>=6.0"
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest",
-    "black",
-    "ruff",
+    "pytest>=7.0",
+    "black>=24.0",
+    "ruff>=0.3.0",
 ]
 
 [build-system]
-requires = ["setuptools>=61", "wheel"]
+requires = ["setuptools>=64", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "."}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["vdmc_salesforce_migration*"]
