@@ -2,12 +2,13 @@ import os
 import requests
 from simple_salesforce import Salesforce, SalesforceLogin
 from ..credentials import load_credentials
+from vdmc_salesforce_migration.utils.config_loader import get_default_env
 
 class SalesforceConnectionError(Exception):
     pass
 
 
-def get_salesforce_client(env: str = None):
+def get_salesforce_client():
     """
     Creates a Salesforce client using only environment variables.
     Automatically detects sandbox vs production.
@@ -15,6 +16,7 @@ def get_salesforce_client(env: str = None):
     """
 
     # Load credentials (from env)
+    env = get_default_env()
     creds = load_credentials(env)
 
     username = creds["username"]
@@ -73,12 +75,13 @@ def _fetch_latest_api_version(domain: str) -> str:
     latest = versions[-1]["version"]
     return latest
 
-def get_session_id(env: str = None):
+def get_session_id():
     """
     Returns a Salesforce session ID and instance URL.
     Useful for Postman or manual API testing.
     """
 
+    env = get_default_env()
     creds = load_credentials(env)
 
     username = creds["username"]

@@ -1,2 +1,12 @@
-log_dir: "./logs"
-input_dir: "./input"
+input:
+  directory: "input"
+
+mappings:
+  directory: "mappings"
+
+logging:
+  directory: "logs"
+
+salesforce:
+  default_batch_size: 10000
+  environment: "develop"
