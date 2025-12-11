@@ -97,7 +97,7 @@ salesforce:
 
 ## Documentation
 
-The docstring documentation is generated into the "html" folder via pdoc.
+The docstring documentation is generated into the "docs" folder via pdoc.
 
 ---
 
