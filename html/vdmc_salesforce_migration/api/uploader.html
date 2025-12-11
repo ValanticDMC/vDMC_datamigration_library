@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>vdmc_salesforce_migration.api.uploader API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>vdmc_salesforce_migration.api.uploader</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="vdmc_salesforce_migration.api.uploader.activate_assets_via_api"><code class="name flex">
+<span>def <span class="ident">activate_assets_via_api</span></span>(<span>client, order_ids: list)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def activate_assets_via_api(
+    client,
+    order_ids: list
+):
+    &#34;&#34;&#34;
+    Triggers Salesforce standard action createOrUpdateAssetFromOrder
+    for a list of OrderIds.
+
+    Logs failures to logs/&lt;env&gt;/order_to_asset_&lt;timestamp&gt;.csv.
+    &#34;&#34;&#34;
+
+    # -------------------------------------------------------------
+    # Use existing authenticated client session (NO second login!)
+    # -------------------------------------------------------------
+    session_id = client.session_id
+
+    # client.base_url is always correct (sandbox / prod / hyperforce)
+    base_url = client.base_url.split(&#34;/services&#34;)[0]
+    endpoint = f&#34;{base_url}/services/data/v65.0/actions/standard/createOrUpdateAssetFromOrder&#34;
+
+    headers = {
+        &#34;Authorization&#34;: f&#34;Bearer {session_id}&#34;,
+        &#34;Content-Type&#34;: &#34;application/json&#34;
+    }
+
+    # -------------------------------------------------------------
+    # Logging
+    # -------------------------------------------------------------
+    log_file = get_log_file(
+        base_dir=Path(log_dir),
+        object_name=&#34;order_to_asset&#34;,
+        prefix=&#34;errors&#34;,
+        env=env
+    )
+    init_csv_log(log_file, [&#34;order_id&#34;, &#34;errors&#34;])
+
+    total = len(order_ids)
+
+    # -------------------------------------------------------------
+    # Loop over orders
+    # -------------------------------------------------------------
+    for idx, order_id in enumerate(order_ids, start=1):
+        print(f&#34;{idx}/{total} ({idx / total:.1%}) – Order {order_id}&#34;)
+
+        payload = { &#34;inputs&#34;: [ { &#34;orderId&#34;: order_id } ] }
+
+        response = requests.post(endpoint, headers=headers, json=payload)
+
+        # Error logging
+        if response.status_code &gt;= 300:
+            append_csv_row(log_file, [order_id, response.text])
+
+    print(f&#34;[Asset Activation] Complete. Errors logged to {log_file}&#34;)</code></pre>
+</details>
+<div class="desc"><p>Triggers Salesforce standard action createOrUpdateAssetFromOrder
+for a list of OrderIds.</p>
+<p>Logs failures to logs/<env>/order_to_asset_<timestamp>.csv.</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.api.uploader.chunk_data"><code class="name flex">
+<span>def <span class="ident">chunk_data</span></span>(<span>data, num_chunks)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def chunk_data(data, num_chunks):
+    &#34;&#34;&#34;
+    Split data evenly into &lt;num_chunks&gt; chunks.
+    &#34;&#34;&#34;
+    size = math.ceil(len(data) / num_chunks)
+    return [data[i:i+size] for i in range(0, len(data), size)]</code></pre>
+</details>
+<div class="desc"><p>Split data evenly into <num_chunks> chunks.</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.api.uploader.cleanup_sobject"><code class="name flex">
+<span>def <span class="ident">cleanup_sobject</span></span>(<span>client: simple_salesforce.api.Salesforce, object_name: str)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cleanup_sobject(
+    client: Salesforce,
+    object_name: str,
+):
+    &#34;&#34;&#34;
+    Full cleanup flow for an sObject:
+      1. Query all records
+      2. Deactivate (Order only)
+      3. Bulk delete with decreasing batch sizes:
+         10k → 100 → 10 → 1
+      4. Log progress consistently
+    &#34;&#34;&#34;
+
+    print(f&#34;\n=== CLEANUP: {object_name} ===&#34;)
+
+    # Query
+    records = query_all_records(client, object_name)
+    if not records:
+        print(f&#34;[CLEANUP] No records found for {object_name}&#34;)
+        return
+
+    # Deactivate Orders
+    if object_name.lower() == &#34;order&#34;:
+        print(&#34;[CLEANUP] Deactivating Orders before deletion…&#34;)
+        deactivate_records(client, object_name, records)
+
+    # 3) Delete with batch sizes
+    batch_sizes = [10000, 100, 10, 1]
+
+    remaining = {&#34;records&#34;: records}  # initial placeholder
+
+    for bs in batch_sizes:
+        if not remaining[&#34;records&#34;]:
+            break
+
+        remaining = delete_from_sf_bulk(
+            client=client,
+            object_name=object_name,
+            data=records,
+            batch_size=bs
+        )
+
+    print(f&#34;[CLEANUP] Finished cleanup for {object_name}&#34;)</code></pre>
+</details>
+<div class="desc"><p>Full cleanup flow for an sObject:
+1. Query all records
+2. Deactivate (Order only)
+3. Bulk delete with decreasing batch sizes:
+10k → 100 → 10 → 1
+4. Log progress consistently</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.api.uploader.deactivate_records"><code class="name flex">
+<span>def <span class="ident">deactivate_records</span></span>(<span>client, object_name, data)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def deactivate_records(client, object_name, data):
+    &#34;&#34;&#34;
+    Bulk-update Order records to Status = Draft before deletion.
+    (Legacy logic preserved)
+    &#34;&#34;&#34;
+    if object_name.lower() == &#39;order&#39;:
+        for record in data:
+            record[&#34;Status&#34;] = &#34;Draft&#34;
+
+    # Bulk update (external ID = None)
+    update_to_sf_bulk(client, object_name, data, external_identifier=None)</code></pre>
+</details>
+<div class="desc"><p>Bulk-update Order records to Status = Draft before deletion.
+(Legacy logic preserved)</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.api.uploader.delete_from_sf_bulk"><code class="name flex">
+<span>def <span class="ident">delete_from_sf_bulk</span></span>(<span>client: simple_salesforce.api.Salesforce,<br>object_name: str,<br>data: List[Dict[str, Any]],<br>batch_size: int = 10000)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def delete_from_sf_bulk(
+    client: Salesforce,
+    object_name: str,
+    data: List[Dict[str, Any]],
+    batch_size: int = default_batch_size,
+):
+    &#34;&#34;&#34;
+    Bulk delete via Bulk API 2.0.
+
+    Writes failed rows into a CSV file in logs/&lt;env&gt;/errors_&lt;object&gt;_&lt;timestamp&gt;.csv
+    &#34;&#34;&#34;
+
+    print(f&#34;[BULK-DELETE] Starting delete for {object_name} (batch_size={batch_size})&#34;)
+
+    sf_object = client.bulk2.__getattr__(object_name)
+    results = sf_object.delete(records=data, batch_size=batch_size)
+
+    # Log failures
+    log_base = Path(log_dir)
+    error_file = get_log_file(
+        base_dir=log_base,
+        object_name=object_name,
+        prefix=&#34;errors&#34;,
+        env=env
+    )
+
+    for job in results:
+        job_id = job[&#34;job_id&#34;]
+        sf_object.get_failed_records(job_id, file=str(error_file))
+
+    # Re-query
+    remaining = client.query_all(f&#34;SELECT Id FROM {object_name}&#34;)
+    count_remaining = len(remaining[&#34;records&#34;])
+
+    print(
+        f&#34;[BULK-DELETE] Done for {object_name}. &#34;
+        f&#34;{count_remaining} records remain. Errors logged to: {error_file}&#34;
+    )
+
+    return remaining</code></pre>
+</details>
+<div class="desc"><p>Bulk delete via Bulk API 2.0.</p>
+<p>Writes failed rows into a CSV file in logs/<env>/errors_<object>_<timestamp>.csv</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.api.uploader.update_to_sf_bulk"><code class="name flex">
+<span>def <span class="ident">update_to_sf_bulk</span></span>(<span>client: simple_salesforce.api.Salesforce,<br>object_name: str,<br>data: List[Dict[str, Any]],<br>external_identifier: str = None,<br>batch_size: int = 10000)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_to_sf_bulk(
+    client: Salesforce,
+    object_name: str,
+    data: List[Dict[str, Any]],
+    external_identifier: str = None,
+    batch_size: int = default_batch_size,
+):
+    &#34;&#34;&#34;
+    Bulk update via Bulk API 2.0.
+    &#34;&#34;&#34;
+
+    sf_object = client.bulk2.__getattr__(object_name)
+
+    if external_identifier:
+        results = sf_object.update(records=data, external_id_field=external_identifier, batch_size=batch_size)
+    else:
+        results = sf_object.update(records=data, batch_size=batch_size)
+
+    log_base = Path(log_dir)
+
+    for job in results:
+        job_id = job[&#34;job_id&#34;]
+        error_file = get_log_file(log_base, object_name, &#34;errors&#34;, env)
+        sf_object.get_failed_records(job_id, file=str(error_file))
+
+    print(f&#34;[BULK] Update done for {object_name}. Errors logged to {log_dir}/{env}/&#34;)</code></pre>
+</details>
+<div class="desc"><p>Bulk update via Bulk API 2.0.</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.api.uploader.upload_rest_chunk"><code class="name flex">
+<span>def <span class="ident">upload_rest_chunk</span></span>(<span>env, chunk, object_name, external_id, id_field)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def upload_rest_chunk(env, chunk, object_name, external_id, id_field):
+    &#34;&#34;&#34;
+    Worker function run in a thread.
+    Creates its own Salesforce client and uploads a chunk.
+    &#34;&#34;&#34;
+    client = get_salesforce_client(env)
+    upload_to_sf_rest(
+        client=client,
+        object_name=object_name,
+        data=chunk,
+        external_identifier=external_id,
+        id_field=id_field,
+        env=env
+    )</code></pre>
+</details>
+<div class="desc"><p>Worker function run in a thread.
+Creates its own Salesforce client and uploads a chunk.</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.api.uploader.upload_rest_parallel"><code class="name flex">
+<span>def <span class="ident">upload_rest_parallel</span></span>(<span>object_name: str,<br>data: list,<br>external_identifier: str = None,<br>id_field: str = None,<br>num_threads: int = 4,<br>env: str = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def upload_rest_parallel(
+    object_name: str,
+    data: list,
+    external_identifier: str = None,
+    id_field: str = None,
+    num_threads: int = 4,
+    env: str = None
+):
+    &#34;&#34;&#34;
+    Parallel REST upload using multiple threads.
+    &#34;&#34;&#34;
+    if env is None:
+        env = get_default_env()
+
+    chunks = chunk_data(data, num_threads)
+
+    print(f&#34;▶ Starting parallel REST upload with {num_threads} threads…&#34;)
+    print(f&#34;▶ Total records: {len(data)} | Chunks: {len(chunks)}&#34;)
+
+    with ThreadPoolExecutor(max_workers=num_threads) as executor:
+        futures = [
+            executor.submit(
+                upload_rest_chunk,
+                env,
+                chunk,
+                object_name,
+                external_identifier,
+                id_field
+            )
+            for chunk in chunks
+        ]
+
+        for i, future in enumerate(futures, start=1):
+            try:
+                future.result()
+                print(f&#34;✔ Chunk {i}/{num_threads} done&#34;)
+            except Exception as e:
+                print(f&#34;❌ Error in chunk {i}: {e}&#34;)
+
+    print(&#34;✔ Parallel REST upload complete.&#34;)</code></pre>
+</details>
+<div class="desc"><p>Parallel REST upload using multiple threads.</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.api.uploader.upload_to_sf_bulk"><code class="name flex">
+<span>def <span class="ident">upload_to_sf_bulk</span></span>(<span>client: simple_salesforce.api.Salesforce,<br>object_name: str,<br>data: List[Dict[str, Any]],<br>external_identifier: str = None,<br>batch_size: int = 10000)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def upload_to_sf_bulk(
+    client: Salesforce,
+    object_name: str,
+    data: List[Dict[str, Any]],
+    external_identifier: str = None,
+    batch_size: int = default_batch_size,
+):
+    &#34;&#34;&#34;
+    Uploads records using the BULK API 2.0 (simple_salesforce.bulk2).
+    Logs failed rows to error CSVs.
+    &#34;&#34;&#34;
+
+    sf_object = client.bulk2.__getattr__(object_name)
+
+    if external_identifier:
+        results = sf_object.upsert(records=data, external_id_field=external_identifier, batch_size=batch_size)
+    else:
+        results = sf_object.insert(records=data, batch_size=batch_size)
+
+    # Log failures
+    log_base = Path(log_dir)
+
+    for job in results:
+        job_id = job[&#34;job_id&#34;]
+        error_file = get_log_file(log_base, object_name, &#34;errors&#34;, env)
+        sf_object.get_failed_records(job_id, file=str(error_file))
+
+    print(f&#34;[BULK] Upload done for {object_name}. Errors logged to {log_dir}/{env}/&#34;)</code></pre>
+</details>
+<div class="desc"><p>Uploads records using the BULK API 2.0 (simple_salesforce.bulk2).
+Logs failed rows to error CSVs.</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.api.uploader.upload_to_sf_rest"><code class="name flex">
+<span>def <span class="ident">upload_to_sf_rest</span></span>(<span>client: simple_salesforce.api.Salesforce,<br>object_name: str,<br>data: List[Dict[str, Any]],<br>external_identifier: str = None,<br>id_field: str = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def upload_to_sf_rest(
+    client: Salesforce,
+    object_name: str,
+    data: List[Dict[str, Any]],
+    external_identifier: str = None,
+    id_field: str = None,
+):
+    &#34;&#34;&#34;
+    Uploads records using the REST API (simple_salesforce) as some objects are not supported via BULK.
+    Writes success/error rows to a per-env log file.
+    &#34;&#34;&#34;
+
+    log_base = Path(log_dir)
+    log_file = get_log_file(
+        base_dir=log_base,
+        object_name=object_name,
+        prefix=&#34;id_write&#34;,
+        env=env
+    )
+    init_csv_log(log_file, [&#34;external_id&#34;, &#34;sf_id&#34;, &#34;success&#34;, &#34;errors&#34;])
+
+    sf_object = getattr(client, object_name)
+
+    for index, record in enumerate(data, start=1):
+
+        external_value = record.get(id_field, &#34;&#34;) if id_field else &#34;&#34;
+
+        # Remove the external id field from payload
+        payload = {k: v for k, v in record.items() if k != id_field and v not in [&#34;&#34;, None]}
+
+        try:
+            if external_identifier:
+                result = sf_object.upsert(
+                    record_id=external_identifier,
+                    data=payload
+                )
+            else:
+                result = sf_object.create(payload)
+
+        except Exception as e:
+            append_csv_row(log_file, [external_value, &#34;&#34;, False, f&#34;Exception: {e}&#34;])
+            if &#34;REQUEST_LIMIT_EXCEEDED&#34; in str(e) or &#34;429&#34; in str(e):
+                raise
+            continue
+
+        sf_id = result.get(&#34;id&#34;)
+        success = result.get(&#34;success&#34;, True)
+        errors = &#34;;&#34;.join(result.get(&#34;errors&#34;, []))
+
+        append_csv_row(log_file, [external_value, sf_id, success, errors])
+
+    print(f&#34;[REST] Upload done for {object_name}. Log file: {log_file}&#34;)</code></pre>
+</details>
+<div class="desc"><p>Uploads records using the REST API (simple_salesforce) as some objects are not supported via BULK.
+Writes success/error rows to a per-env log file.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="vdmc_salesforce_migration.api" href="index.html">vdmc_salesforce_migration.api</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="vdmc_salesforce_migration.api.uploader.activate_assets_via_api" href="#vdmc_salesforce_migration.api.uploader.activate_assets_via_api">activate_assets_via_api</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.api.uploader.chunk_data" href="#vdmc_salesforce_migration.api.uploader.chunk_data">chunk_data</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.api.uploader.cleanup_sobject" href="#vdmc_salesforce_migration.api.uploader.cleanup_sobject">cleanup_sobject</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.api.uploader.deactivate_records" href="#vdmc_salesforce_migration.api.uploader.deactivate_records">deactivate_records</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.api.uploader.delete_from_sf_bulk" href="#vdmc_salesforce_migration.api.uploader.delete_from_sf_bulk">delete_from_sf_bulk</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.api.uploader.update_to_sf_bulk" href="#vdmc_salesforce_migration.api.uploader.update_to_sf_bulk">update_to_sf_bulk</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.api.uploader.upload_rest_chunk" href="#vdmc_salesforce_migration.api.uploader.upload_rest_chunk">upload_rest_chunk</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.api.uploader.upload_rest_parallel" href="#vdmc_salesforce_migration.api.uploader.upload_rest_parallel">upload_rest_parallel</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.api.uploader.upload_to_sf_bulk" href="#vdmc_salesforce_migration.api.uploader.upload_to_sf_bulk">upload_to_sf_bulk</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.api.uploader.upload_to_sf_rest" href="#vdmc_salesforce_migration.api.uploader.upload_to_sf_rest">upload_to_sf_rest</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

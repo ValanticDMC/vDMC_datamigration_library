@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>vdmc_salesforce_migration.utils.cleaning API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>vdmc_salesforce_migration.utils.cleaning</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="vdmc_salesforce_migration.utils.cleaning.clean_emails"><code class="name flex">
+<span>def <span class="ident">clean_emails</span></span>(<span>df: pandas.core.frame.DataFrame, field_name: str) ‑> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clean_emails(df: pd.DataFrame, field_name: str) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;Ensure field contains valid single emails only.&#34;&#34;&#34;
+    email_pattern = re.compile(r&#34;^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$&#34;)
+
+    def _validate_email(x):
+        if isinstance(x, str) and email_pattern.match(x):
+            return x.replace(&#34;..&#34;, &#34;.&#34;)
+        return &#34;&#34;
+
+    df[field_name] = df[field_name].apply(_validate_email)
+    return df</code></pre>
+</details>
+<div class="desc"><p>Ensure field contains valid single emails only.</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.utils.cleaning.clean_numeric_fields"><code class="name flex">
+<span>def <span class="ident">clean_numeric_fields</span></span>(<span>df: pandas.core.frame.DataFrame) ‑> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clean_numeric_fields(df: pd.DataFrame) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Coerce numeric-looking columns into clean floats and replace invalid values.
+    &#34;&#34;&#34;
+    numeric_cols = [
+        col for col in df.columns
+        if pd.api.types.is_numeric_dtype(df[col])
+    ]
+
+    for col in numeric_cols:
+        df[col] = pd.to_numeric(df[col], errors=&#39;coerce&#39;).fillna(0)
+
+    return df</code></pre>
+</details>
+<div class="desc"><p>Coerce numeric-looking columns into clean floats and replace invalid values.</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.utils.cleaning.clear_fields"><code class="name flex">
+<span>def <span class="ident">clear_fields</span></span>(<span>df: pandas.core.frame.DataFrame) ‑> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clear_fields(df: pd.DataFrame) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Apply sanitization to all object fields and clean numerics.
+    &#34;&#34;&#34;
+    object_cols = df.select_dtypes(include=&#34;object&#34;).columns
+
+    for col in object_cols:
+        df[col] = df[col].apply(sanitize_field)
+
+    # Normalize empty-like values
+    df = df.replace([&#34;nan&#34;, &#34;NaN&#34;, &#34;None&#34;, &#34;NONE&#34;, &#34;null&#34;, &#34;NULL&#34;], &#34;&#34;)
+
+    df = clean_numeric_fields(df)
+    return df</code></pre>
+</details>
+<div class="desc"><p>Apply sanitization to all object fields and clean numerics.</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.utils.cleaning.convert_datetime"><code class="name flex">
+<span>def <span class="ident">convert_datetime</span></span>(<span>df: pandas.core.frame.DataFrame, fieldname: str) ‑> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert_datetime(df: pd.DataFrame, fieldname: str) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Converts a datetime column into Salesforce-compatible UTC ISO format.
+    &#34;&#34;&#34;
+    df[fieldname] = pd.to_datetime(df[fieldname], errors=&#39;coerce&#39;)
+
+    if df[fieldname].dt.tz is None:
+        df[fieldname] = df[fieldname].dt.tz_localize(&#39;UTC&#39;)
+    else:
+        df[fieldname] = df[fieldname].dt.tz_convert(&#39;UTC&#39;)
+
+    df[fieldname] = df[fieldname].dt.strftime(&#39;%Y-%m-%dT%H:%M:%SZ&#39;).fillna(&#39;&#39;)
+    return df</code></pre>
+</details>
+<div class="desc"><p>Converts a datetime column into Salesforce-compatible UTC ISO format.</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.utils.cleaning.extract_email"><code class="name flex">
+<span>def <span class="ident">extract_email</span></span>(<span>value: Any) ‑> List[str]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def extract_email(value: Any) -&gt; List[str]:
+    &#34;&#34;&#34;Extract valid email addresses from a string.&#34;&#34;&#34;
+    if pd.isna(value):
+        return []
+    return EMAIL_REGEX.findall(str(value))</code></pre>
+</details>
+<div class="desc"><p>Extract valid email addresses from a string.</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.utils.cleaning.extract_email_from_field"><code class="name flex">
+<span>def <span class="ident">extract_email_from_field</span></span>(<span>df: pandas.core.frame.DataFrame, field: str) ‑> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def extract_email_from_field(df: pd.DataFrame, field: str) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Extract an email address from a specific field.
+    &#34;&#34;&#34;
+    df[field] = df[field].apply(lambda x: &#34;,&#34;.join(extract_email(x)))
+    return df</code></pre>
+</details>
+<div class="desc"><p>Extract an email address from a specific field.</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.utils.cleaning.join_related_fields"><code class="name flex">
+<span>def <span class="ident">join_related_fields</span></span>(<span>row: Dict[str, Any], fields: List[str], lookup: Dict[str, str]) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def join_related_fields(row: Dict[str, Any], fields: List[str], lookup: Dict[str, str]) -&gt; str:
+    &#34;&#34;&#34;
+    Joins multiple fields into one string.
+    &#34;&#34;&#34;
+    values = []
+    for f in fields:
+        v = row.get(f)
+        if pd.isna(v):
+            continue
+        v = str(v).strip()
+        if v in lookup:
+            values.append(lookup[v])
+    return &#34;,&#34;.join(values)</code></pre>
+</details>
+<div class="desc"><p>Joins multiple fields into one string.</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.utils.cleaning.replace_ids_in_list"><code class="name flex">
+<span>def <span class="ident">replace_ids_in_list</span></span>(<span>value: Any, id_map: Dict[str, str]) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def replace_ids_in_list(value: Any, id_map: Dict[str, str]) -&gt; str:
+    &#34;&#34;&#34;Replace semicolon-separated values using a lookup map.&#34;&#34;&#34;
+    if pd.isna(value) or value == &#34;&#34;:
+        return &#34;&#34;
+
+    ids = str(value).split(&#34;;&#34;)
+    mapped = [id_map.get(i.strip(), &#34;&#34;) for i in ids]
+    return &#34;,&#34;.join([m for m in mapped if m])</code></pre>
+</details>
+<div class="desc"><p>Replace semicolon-separated values using a lookup map.</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.utils.cleaning.replace_text"><code class="name flex">
+<span>def <span class="ident">replace_text</span></span>(<span>text: Any, mapping: Dict[str, str]) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def replace_text(text: Any, mapping: Dict[str, str]) -&gt; str:
+    &#34;&#34;&#34;
+    Replaces text based on a mapping dictionary.
+    &#34;&#34;&#34;
+    if pd.isna(text):
+        return &#34;&#34;
+    result = str(text)
+    for old, new in mapping.items():
+        result = result.replace(old, new)
+    return result</code></pre>
+</details>
+<div class="desc"><p>Replaces text based on a mapping dictionary.</p></div>
+</dd>
+<dt id="vdmc_salesforce_migration.utils.cleaning.sanitize_field"><code class="name flex">
+<span>def <span class="ident">sanitize_field</span></span>(<span>value: Any) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sanitize_field(value: Any) -&gt; str:
+    &#34;&#34;&#34;Remove invalid characters, normalize spacing, and strip.&#34;&#34;&#34;
+    if pd.isna(value):
+        return &#34;&#34;
+
+    if isinstance(value, bytes):
+        value = value.decode(&#34;utf-8&#34;, errors=&#34;ignore&#34;)
+    else:
+        value = str(value).encode(&#34;utf-8&#34;, errors=&#34;ignore&#34;).decode(&#34;utf-8&#34;, errors=&#34;ignore&#34;)
+
+    value = value.replace(&#39;&#34;&#39;, &#34;&#39;&#34;)
+    value = re.sub(r&#39;[\r\n\t]+&#39;, &#39; &#39;, value)
+    value = re.sub(r&#39;[^\x20-\x7EäöüÄÖÜß€°²³]&#39;, &#39;&#39;, value)
+    value = re.sub(r&#39;\s{2,}&#39;, &#39; &#39;, value)
+    value = value.replace(&#34;;&#34;, &#34;·&#34;)
+
+    return value.strip()</code></pre>
+</details>
+<div class="desc"><p>Remove invalid characters, normalize spacing, and strip.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="vdmc_salesforce_migration.utils" href="index.html">vdmc_salesforce_migration.utils</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="vdmc_salesforce_migration.utils.cleaning.clean_emails" href="#vdmc_salesforce_migration.utils.cleaning.clean_emails">clean_emails</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.utils.cleaning.clean_numeric_fields" href="#vdmc_salesforce_migration.utils.cleaning.clean_numeric_fields">clean_numeric_fields</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.utils.cleaning.clear_fields" href="#vdmc_salesforce_migration.utils.cleaning.clear_fields">clear_fields</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.utils.cleaning.convert_datetime" href="#vdmc_salesforce_migration.utils.cleaning.convert_datetime">convert_datetime</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.utils.cleaning.extract_email" href="#vdmc_salesforce_migration.utils.cleaning.extract_email">extract_email</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.utils.cleaning.extract_email_from_field" href="#vdmc_salesforce_migration.utils.cleaning.extract_email_from_field">extract_email_from_field</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.utils.cleaning.join_related_fields" href="#vdmc_salesforce_migration.utils.cleaning.join_related_fields">join_related_fields</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.utils.cleaning.replace_ids_in_list" href="#vdmc_salesforce_migration.utils.cleaning.replace_ids_in_list">replace_ids_in_list</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.utils.cleaning.replace_text" href="#vdmc_salesforce_migration.utils.cleaning.replace_text">replace_text</a></code></li>
+<li><code><a title="vdmc_salesforce_migration.utils.cleaning.sanitize_field" href="#vdmc_salesforce_migration.utils.cleaning.sanitize_field">sanitize_field</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>
