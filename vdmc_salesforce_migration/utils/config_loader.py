@@ -43,4 +43,8 @@ def get_default_batch_size() -> int:
 
 def get_default_env() -> str:
     cfg = load_config()
-    return cfg.get("salesforce", {}).get("environment", "develop")
+    return cfg.get("salesforce", {}).get("environment", "dev")
+
+def get_default_api_version() -> str:
+    cfg = load_config()
+    return cfg.get("salesforce", {}).get("api-version", 63)

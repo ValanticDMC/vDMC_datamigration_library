@@ -8,13 +8,15 @@ from vdmc_salesforce_migration.utils.logging import (
 )
 from vdmc_salesforce_migration.utils.config_loader import get_log_dir, get_default_env, get_default_batch_size
 from vdmc_salesforce_migration.api.auth import get_salesforce_client
+from vdmc_salesforce_migration import query_all_records
 import requests
 import math
 from concurrent.futures import ThreadPoolExecutor
 
-log_dir = get_log_dir()
+root_dir = Path(__file__).resolve().parent.parent.parent
+log_dir = root_dir / get_log_dir()
 env = get_default_env()
-default_batch_size = get_default_batch_size
+default_batch_size = get_default_batch_size()
 
 # ---------------------------------------------------------------------------
 # REST API upload (single-record operations, slow but precise)
@@ -52,7 +54,7 @@ def upload_to_sf_rest(
         try:
             if external_identifier:
                 result = sf_object.upsert(
-                    external_id_field=external_identifier,
+                    record_id=external_identifier,
                     data=payload
                 )
             else:
@@ -267,3 +269,103 @@ def upload_rest_parallel(
                 print(f"❌ Error in chunk {i}: {e}")
 
     print("✔ Parallel REST upload complete.")
+
+
+def deactivate_records(client, object_name, data):
+    """
+    Bulk-update Order records to Status = Draft before deletion.
+    (Legacy logic preserved)
+    """
+    if object_name.lower() == 'order':
+        for record in data:
+            record["Status"] = "Draft"
+
+    # Bulk update (external ID = None)
+    update_to_sf_bulk(client, object_name, data, external_identifier=None)
+
+
+def cleanup_sobject(
+    client: Salesforce,
+    object_name: str,
+):
+    """
+    Full cleanup flow for an sObject:
+      1. Query all records
+      2. Deactivate (Order only)
+      3. Bulk delete with decreasing batch sizes:
+         10k → 100 → 10 → 1
+      4. Log progress consistently
+    """
+
+    print(f"\n=== CLEANUP: {object_name} ===")
+
+    # Query
+    records = query_all_records(client, object_name)
+    if not records:
+        print(f"[CLEANUP] No records found for {object_name}")
+        return
+
+    # Deactivate Orders
+    if object_name.lower() == "order":
+        print("[CLEANUP] Deactivating Orders before deletion…")
+        deactivate_records(client, object_name, records)
+
+    # 3) Delete with batch sizes
+    batch_sizes = [10000, 100, 10, 1]
+
+    remaining = {"records": records}  # initial placeholder
+
+    for bs in batch_sizes:
+        if not remaining["records"]:
+            break
+
+        remaining = delete_from_sf_bulk(
+            client=client,
+            object_name=object_name,
+            data=records,
+            batch_size=bs
+        )
+
+    print(f"[CLEANUP] Finished cleanup for {object_name}")
+
+
+def delete_from_sf_bulk(
+    client: Salesforce,
+    object_name: str,
+    data: List[Dict[str, Any]],
+    batch_size: int = default_batch_size,
+):
+    """
+    Bulk delete via Bulk API 2.0.
+
+    Writes failed rows into a CSV file in logs/<env>/errors_<object>_<timestamp>.csv
+    """
+
+    print(f"[BULK-DELETE] Starting delete for {object_name} (batch_size={batch_size})")
+
+    sf_object = client.bulk2.__getattr__(object_name)
+    results = sf_object.delete(records=data, batch_size=batch_size)
+
+    # Log failures
+    log_base = Path(log_dir)
+    error_file = get_log_file(
+        base_dir=log_base,
+        object_name=object_name,
+        prefix="errors",
+        env=env
+    )
+
+    for job in results:
+        job_id = job["job_id"]
+        sf_object.get_failed_records(job_id, file=str(error_file))
+
+    # Re-query
+    remaining = client.query_all(f"SELECT Id FROM {object_name}")
+    count_remaining = len(remaining["records"])
+
+    print(
+        f"[BULK-DELETE] Done for {object_name}. "
+        f"{count_remaining} records remain. Errors logged to: {error_file}"
+    )
+
+    return remaining

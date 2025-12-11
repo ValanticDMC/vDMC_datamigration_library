@@ -2,7 +2,9 @@ import os
 import requests
 from simple_salesforce import Salesforce, SalesforceLogin
 from ..credentials import load_credentials
-from vdmc_salesforce_migration.utils.config_loader import get_default_env
+from vdmc_salesforce_migration.utils.config_loader import get_default_env, get_default_api_version
+
+api_version = str(get_default_api_version()) + '.0'
 
 class SalesforceConnectionError(Exception):
     pass
@@ -26,7 +28,7 @@ def get_salesforce_client():
     instance_url = creds.get("instance_url", "login")
 
     # Get the latest API version to avoid unsupported objects from new releases
-    version = _fetch_latest_api_version(domain)
+    version = get_default_api_version
     print(f"Using Salesforce API version {version}")
 
     # Init Client
@@ -36,7 +38,7 @@ def get_salesforce_client():
             password=password,
             security_token=token,
             domain=domain,
-            version=version,
+            version=api_version,
             instance_url=instance_url
         )
     except Exception as e:
@@ -59,7 +61,7 @@ def _fetch_latest_api_version(domain: str) -> str:
     https://login.salesforce.com/services/data/
     This returns a list, we take the highest version.
     """
-    base_url = f"https://{domain}.salesforce.com/services/data/"
+    base_url = f"https://{domain}/services/data/"
 
     try:
         response = requests.get(base_url, timeout=5)

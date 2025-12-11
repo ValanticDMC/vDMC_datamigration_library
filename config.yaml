@@ -10,3 +10,4 @@ logging:
 salesforce:
   default_batch_size: 10000
   environment: "develop"
+  api-version: 63

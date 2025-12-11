@@ -130,3 +130,14 @@ def get_record_types(client: Salesforce, object_name: str) -> Dict[str, str]:
         f"WHERE SObjectType = '{object_name}'"
     )
     return query_to_map(client, soql, "DeveloperName", "Id")
+
+
+def query_all_records(client, object_name):
+    """Queries all Ids from an sObject and structures them for Bulk API."""
+    data_sf = client.query_all(f"SELECT Id FROM {object_name}")
+
+    ids = [rec["Id"] for rec in data_sf["records"]]
+    data = [{"Id": id_value} for id_value in ids]
+
+    print(f"{len(ids)} {object_name} Records found.")
+    return data
