@@ -191,10 +191,6 @@ for obj in objects:
 
 ---
 
-## Testing
-
----
-
 ## How to collaborate
 We welcome contributions from developers working on Salesforce data migration projects. 
 If you plan to do changes outside of projects, let the CoE Salesforce know what you want to change and we will take it into our planning. 
@@ -231,5 +227,3 @@ We follow:
 - Add or update tests for new functionality.
 - Ensure backwards compatibility where possible.
 
----
----
